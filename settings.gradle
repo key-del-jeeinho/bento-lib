@@ -1,0 +1,5 @@
+rootProject.name = 'bento-lib'
+include 'bento-common-api'
+include 'bento-common-util'
+include 'bento-common-core'
+
