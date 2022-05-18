@@ -13,14 +13,15 @@ compileTestKotlin {
 }
 
 dependencies {
-    api(project(":bento-common-api"))
+    //api(project(":bento-common-api"))
+    implementation("io.github.key-del-jeeinho:bento-common-api:1.0.0-rc1")
 }
 
 publishing {
     publications {
         maven(MavenPublication) {
             artifactId = 'bento-common-util' //flexible property
-            version = '1.0.0-SNAPSHOT' //flexible property
+            version = '1.0.0-rc1' //flexible property
             pom {
                 name = 'Bento Common Util' //flexible property
                 description = "Component that collects the global public utility class in the Bento library." //flexible property
