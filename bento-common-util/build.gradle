@@ -11,3 +11,35 @@ compileTestKotlin {
         jvmTarget = "1.8"
     }
 }
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifactId = 'bento-common-util' //flexible property
+            version = '1.0.0-SNAPSHOT' //flexible property
+            pom {
+                name = 'Bento Common Util' //flexible property
+                description = "Component that collects the global public utility class in the Bento library." //flexible property
+                url = 'https://github.com/key-del-jeeinho/bento-lib'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'velocia'
+                        name = 'JeeInho'
+                        email = 'develop.raul@gmail.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/key-del-jeeinho/bento-lib.git'
+                    developerConnection = 'scm:git:ssh://github.com/key-del-jeeinho/bento-lib.git'
+                    url = 'https://github.com/key-del-jeeinho/bento-lib/'
+                }
+            }
+        }
+    }
+}
