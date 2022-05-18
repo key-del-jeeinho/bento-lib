@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'signing'
     id 'maven-publish'
     id 'org.jetbrains.kotlin.jvm' version '1.5.10'
 }
@@ -23,6 +24,7 @@ test {
 
 subprojects {
     apply plugin: 'java'
+    apply plugin: 'signing'
     apply plugin: 'maven-publish'
     apply plugin: 'org.jetbrains.kotlin.jvm'
 
@@ -37,5 +39,41 @@ subprojects {
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
         implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    }
+
+    task javadocJar(type: Jar) {
+        archiveClassifier.set 'javadoc'
+        from javadoc
+    }
+
+    task sourcesJar(type: Jar) {
+        archiveClassifier.set 'sources'
+        from sourceSets.main.allSource
+    }
+
+    signing {
+        sign publishing.publications
+    }
+
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                groupId = 'io.github.key-del-jeeinho'
+
+                from components.java
+                artifact sourcesJar
+                artifact javadocJar
+            }
+        }
+        repositories {
+            maven {
+                credentials {
+                    username = project.ossrhUsername
+                    password = project.ossrhPassword
+                }
+                name = "OSSRH"
+                url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+            }
+        }
     }
 }
