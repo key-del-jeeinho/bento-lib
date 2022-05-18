@@ -12,6 +12,10 @@ compileTestKotlin {
     }
 }
 
+dependencies {
+    api(project(":bento-common-api"))
+}
+
 publishing {
     publications {
         maven(MavenPublication) {
